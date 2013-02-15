@@ -358,10 +358,10 @@ Copyright (c) 2007 Microsoft Corporation. All rights reserved.</pre></p>
 <div class="subSection">
 <p>
 	This code sample demonstrates the use of the Microsoft Remote Differential Compression COM interfaces
-    in a .NET environment using C#. This sample code requires the .NET Framework 2.0 and Microsoft Vista 
+    in a .NET environment using C#. This sample code requires the .NET Framework 4.0 and Microsoft Vista 
 	or Windows 2003 R2 at run time.</p> 
 
-<p>The following Visual Studio 2005 projects are included:</p>
+<p>The following Visual Studio 2010 projects are included:</p>
 
 <h5 class="subHeading">Microsoft.RDC</h5>
 <p>
@@ -384,10 +384,11 @@ Copyright (c) 2007 Microsoft Corporation. All rights reserved.</pre></p>
 	using .NET. The client is a basic console application that takes the following arguments.</p>
 
 	<pre>
-USAGE: client.exe -u remoteUrl remoteFile(source) localFile(seed) targetFile(output)
+USAGE: client.exe [-r x] remoteUrl remoteFile(source) localFile(seed) targetFile(output)
 
 Arguments:
--u          Absolute URL to the remote RDC Web Service.
+-r x        [optional] RDC signature recursion depth.
+url         Absolute URL to the remote RDC Web Service.
 remoteFile  Absolute path to the remote file.
 localFile   Absolute path to the local seed file.
 targetFile  Absolute path to the local target file.  This is the output.
@@ -397,10 +398,10 @@ targetFile  Absolute path to the local target file.  This is the output.
 <h1 class="heading"><a name="EFJBHC"></a>Dependencies</h1>
 <div id="sectionSection0" class="section">
 
-<p>You must have the Windows SDK for Windows Vista. If you do not install the SDK to the default location, which is listed below,
+<p>You must have the Windows SDK for Windows Vista or later. If you do not install the SDK to the default location, which is listed below,
 you must update the Visual Studio Include and Library paths in the sample code accordingly. <a href="http://www.microsoft.com/downloads/details.aspx?familyid=c2b1e300-f358-4523-b479-f53d234cdccf&displaylang=en">
 Download the Windows SDK for Windows Vista</a>. The Windows Vista SDK installs to 
-%ProgramFiles%\Microsoft SDKs\Windows\v6.0.</p>
+%ProgramFiles%\Microsoft SDKs\Windows\vX.0.</p>
 </div>
 <p class="TopOfPage"><a href="#pagetop" class="TopOfPageLink">Top of page</a></p>
 <h1 class="heading"><a name="EFJBHD"></a>More Information and Errata</h1>
@@ -414,6 +415,10 @@ Download the Windows SDK for Windows Vista</a>. The Windows Vista SDK installs t
 at <a href="http://www.jwsecure.com/dan/index.html">http://www.jwsecure.com/dan/index.html</a>. 
 Please report new bugs by contacting JW Secure at
 <a href="http://www.jwsecure.com/contact.html">http://www.jwsecure.com/contact.html</a>.</p>
+
+<p>
+    This sample has been fixed and improved by David Jade. 
+	See <a href="http://blog.mutable.net">http://blog.mutable.net</a> for details</p>
 </div>
 <p class="TopOfPage"><a href="#pagetop" class="TopOfPageLink">Top of page</a></p>
 </div>

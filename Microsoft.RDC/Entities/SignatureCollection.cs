@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Microsoft.RDC
 {
-    public class SignatureCollection : BaseCollection<SignatureInfo>
-    {
-    }
+	public class SignatureCollection : List<SignatureInfo>
+	{
+	}
 }

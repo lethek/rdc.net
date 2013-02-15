@@ -121,24 +121,26 @@ namespace Client.RdcProxy {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetSignatureManifest", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SignatureManifest GetSignatureManifest(string file) {
+        public SignatureManifest GetSignatureManifest(string file, int recursionDepth) {
             object[] results = this.Invoke("GetSignatureManifest", new object[] {
-                        file});
+                        file,
+                        recursionDepth});
             return ((SignatureManifest)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSignatureManifestAsync(string file) {
-            this.GetSignatureManifestAsync(file, null);
+        public void GetSignatureManifestAsync(string file, int recursionDepth) {
+            this.GetSignatureManifestAsync(file, recursionDepth, null);
         }
         
         /// <remarks/>
-        public void GetSignatureManifestAsync(string file, object userState) {
+        public void GetSignatureManifestAsync(string file, int recursionDepth, object userState) {
             if ((this.GetSignatureManifestOperationCompleted == null)) {
                 this.GetSignatureManifestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSignatureManifestOperationCompleted);
             }
             this.InvokeAsync("GetSignatureManifest", new object[] {
-                        file}, this.GetSignatureManifestOperationCompleted, userState);
+                        file,
+                        recursionDepth}, this.GetSignatureManifestOperationCompleted, userState);
         }
         
         private void OnGetSignatureManifestOperationCompleted(object arg) {

@@ -7,108 +7,110 @@ using System.Xml.Serialization;
 
 namespace Microsoft.RDC
 {
-    [Serializable()]
-    public class SignatureInfo : IDisposable    
-    {
-        private int index = 0;
-        private string name;
-        private string path = String.Empty;
-        private long length = 0;
-        [NonSerialized()] private FileStream stream;
-        [NonSerialized()] private RdcNeed[] needs;
+	[Serializable()]
+	public class SignatureInfo : IDisposable    
+	{
+		private int index = 0;
+		private string name;
+		private string path = String.Empty;
+		private long length = 0;
+		[NonSerialized()] private FileStream stream;
+		[NonSerialized()] private RdcNeed[] needs;
 
-        #region Constructor(s)
+		#region Constructor(s)
 
-        public SignatureInfo() : this(Directory.GetCurrentDirectory(), false) { }
-        
-        public SignatureInfo(string path, bool create)
-        {
-            // Auto-generate a new unique name 
-            // for this signature entry.
-            this.name = Guid.NewGuid().ToString();
-            this.path = path;
+		public SignatureInfo() : this(null, 0, Directory.GetCurrentDirectory(), false) { }
 
-            // If the create flag was passed in, lets go 
-            // ahead and create the file.
-            if (create)
-                stream = File.Create(this.FullPath);
-        }
+		public SignatureInfo(string BaseName, int Depth, string path, bool OpenOrCreate)
+		{
+			// Set a name based on the file's name and signature recursion depth
+			if (BaseName != null)
+			{
+				this.name = BaseName + (Depth != -1 ? "-" + Depth.ToString() : null);
+			}
+			this.path = path;
 
-        #endregion
+			// If the open or create flag was passed in, lets go 
+			// ahead and create the stream.
+			if (OpenOrCreate)
+				stream = File.Open(this.FullPath, FileMode.OpenOrCreate);
+		}
 
-        #region Public Properties
+		#endregion
 
-        public int Index
-        {
-            get { return index; }
-            set { index = value; }
-        }
+		#region Public Properties
 
-        /// <summary>
-        /// Gets or sets the signature name.
-        /// </summary>
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+		public int Index
+		{
+			get { return index; }
+			set { index = value; }
+		}
 
-        /// <summary>
-        /// Gets or sets the source path for this signature.
-        /// </summary>
-        public string Path
-        {
-            get { return path; }
-            set { path = value; }
-        }
+		/// <summary>
+		/// Gets or sets the signature name.
+		/// </summary>
+		public string Name
+		{
+			get { return name; }
+			set { name = value; }
+		}
 
-        public long Length
-        {
-            get { return length; }
-            set { length = value; }
-        }
+		/// <summary>
+		/// Gets or sets the source path for this signature.
+		/// </summary>
+		public string Path
+		{
+			get { return path; }
+			set { path = value; }
+		}
 
-        /// <summary>
-        /// Gets the signatures full file path.
-        /// </summary>
-        public string FullPath
-        {
-            get { return(System.IO.Path.Combine(path, name) + ".sig"); }
-        }
+		public long Length
+		{
+			get { return length; }
+			set { length = value; }
+		}
 
-        /// <summary>
-        /// Gets or sets the underlying stream.
-        /// </summary>                
-        [System.Xml.Serialization.SoapIgnore()]
-        [XmlIgnore()]
-        public FileStream InnerStream
-        {
-            get { return stream; }
-            set { stream = value; }
-        }
+		/// <summary>
+		/// Gets the signatures full file path.
+		/// </summary>
+		public string FullPath
+		{
+			get { return(System.IO.Path.Combine(path, name) + ".sig"); }
+		}
 
-        /// <summary>
-        /// Gets or sets the Rdc Needs array.
-        /// </summary>
-        [System.Xml.Serialization.SoapIgnore()]
-        [XmlIgnore()]
-        public RdcNeed[] Needs
-        {
-            get { return needs; }
-            set { needs = value; }
-        }
+		/// <summary>
+		/// Gets or sets the underlying stream.
+		/// </summary>                
+		[System.Xml.Serialization.SoapIgnore()]
+		[XmlIgnore()]
+		public FileStream InnerStream
+		{
+			get { return stream; }
+			set { stream = value; }
+		}
 
-        #endregion
+		/// <summary>
+		/// Gets or sets the Rdc Needs array.
+		/// </summary>
+		[System.Xml.Serialization.SoapIgnore()]
+		[XmlIgnore()]
+		public RdcNeed[] Needs
+		{
+			get { return needs; }
+			set { needs = value; }
+		}
 
+		#endregion
 
-        #region IDisposable Members
+		#region IDisposable Members
 
-        public void Dispose()
-        {
-            if (this.stream != null)
-                stream.Dispose();
-        }
+		public void Dispose()
+		{
+			// get rid of managed resources
+			if (this.stream != null)
+				stream.Dispose();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
