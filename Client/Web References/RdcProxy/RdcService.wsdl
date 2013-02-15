@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetRdcVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRdcVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRdcVersionResult" type="tns:RdcVersion" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RdcVersion">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentVersion" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinimumCompatibleAppVersion" type="s:unsignedInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSignatureManifest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSignatureManifestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSignatureManifestResult" type="tns:SignatureManifest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SignatureManifest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="File" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Signatures" type="tns:ArrayOfSignatureInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileLength" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSignatureInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SignatureInfo" nillable="true" type="tns:SignatureInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SignatureInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Index" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Path" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSimilarityData">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSimilarityDataResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="TransferDataBlock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="file" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="length" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TransferDataBlockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TransferDataBlockResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Finialize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="manifest" type="tns:SignatureManifest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinializeResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRdcVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRdcVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetRdcVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRdcVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSignatureManifestSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSignatureManifest" />
+  </wsdl:message>
+  <wsdl:message name="GetSignatureManifestSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSignatureManifestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSimilarityDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSimilarityData" />
+  </wsdl:message>
+  <wsdl:message name="GetSimilarityDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSimilarityDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="TransferDataBlockSoapIn">
+    <wsdl:part name="parameters" element="tns:TransferDataBlock" />
+  </wsdl:message>
+  <wsdl:message name="TransferDataBlockSoapOut">
+    <wsdl:part name="parameters" element="tns:TransferDataBlockResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinializeSoapIn">
+    <wsdl:part name="parameters" element="tns:Finialize" />
+  </wsdl:message>
+  <wsdl:message name="FinializeSoapOut">
+    <wsdl:part name="parameters" element="tns:FinializeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RdcServiceSoap">
+    <wsdl:operation name="GetRdcVersion">
+      <wsdl:input message="tns:GetRdcVersionSoapIn" />
+      <wsdl:output message="tns:GetRdcVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSignatureManifest">
+      <wsdl:input message="tns:GetSignatureManifestSoapIn" />
+      <wsdl:output message="tns:GetSignatureManifestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSimilarityData">
+      <wsdl:input message="tns:GetSimilarityDataSoapIn" />
+      <wsdl:output message="tns:GetSimilarityDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferDataBlock">
+      <wsdl:input message="tns:TransferDataBlockSoapIn" />
+      <wsdl:output message="tns:TransferDataBlockSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Finialize">
+      <wsdl:input message="tns:FinializeSoapIn" />
+      <wsdl:output message="tns:FinializeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RdcServiceSoap" type="tns:RdcServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRdcVersion">
+      <soap:operation soapAction="http://tempuri.org/GetRdcVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSignatureManifest">
+      <soap:operation soapAction="http://tempuri.org/GetSignatureManifest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimilarityData">
+      <soap:operation soapAction="http://tempuri.org/GetSimilarityData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferDataBlock">
+      <soap:operation soapAction="http://tempuri.org/TransferDataBlock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Finialize">
+      <soap:operation soapAction="http://tempuri.org/Finialize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RdcServiceSoap12" type="tns:RdcServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRdcVersion">
+      <soap12:operation soapAction="http://tempuri.org/GetRdcVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSignatureManifest">
+      <soap12:operation soapAction="http://tempuri.org/GetSignatureManifest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSimilarityData">
+      <soap12:operation soapAction="http://tempuri.org/GetSimilarityData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferDataBlock">
+      <soap12:operation soapAction="http://tempuri.org/TransferDataBlock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Finialize">
+      <soap12:operation soapAction="http://tempuri.org/Finialize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RdcService">
+    <wsdl:port name="RdcServiceSoap" binding="tns:RdcServiceSoap">
+      <soap:address location="http://localhost:4183/RdcWebService/RdcService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RdcServiceSoap12" binding="tns:RdcServiceSoap12">
+      <soap12:address location="http://localhost:4183/RdcWebService/RdcService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
